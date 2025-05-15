@@ -83,6 +83,19 @@ void addCalibrationOptions(CLI::App& app, std::shared_ptr<CalibrationConfig> con
       config->greedySampling,
       "Use greedy sampling to select calibration frames");
   greedySamplingOption->default_val(config->greedySampling);
+
+  auto* floorConstraintOption = app.add_option(
+      "--floor",
+      config->enforceFloorInFirstFrame,
+      "Use floor constraints to prevent penetration into floor");
+  floorConstraintOption->default_val(config->enforceFloorInFirstFrame)
+      ->check(CLI::NonNegativeNumber);
+
+  auto* poseOption = app.add_option(
+      "--init-pose",
+      config->firstFramePoseConstraintSet,
+      "Minimum percetange of visible markers used for tracking");
+  poseOption->default_val(config->firstFramePoseConstraintSet);
 }
 
 void addTrackingOptions(CLI::App& app, std::shared_ptr<TrackingConfig> config) {

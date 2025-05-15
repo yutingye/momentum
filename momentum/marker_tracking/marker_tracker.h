@@ -39,6 +39,10 @@ struct CalibrationConfig : public BaseConfig {
   bool globalScaleOnly = false;
   /// True to calibrate only the locators and not the body.
   bool locatorsOnly = false;
+  /// True to lock the floor constraints to the floor in the first frame
+  bool enforceFloorInFirstFrame = false;
+  /// Name of a pose constraint set to use for the first frame
+  std::string firstFramePoseConstraintSet = "";
 };
 
 /// Configuration for pose tracking given a calibrated body and locators
@@ -87,7 +91,9 @@ Eigen::MatrixXf trackSequence(
     const Eigen::MatrixXf& initialMotion,
     const TrackingConfig& config,
     float regularizer = 0.0,
-    size_t frameStride = 1);
+    size_t frameStride = 1,
+    bool enforceFloorInFirstFrame = false,
+    const std::string& firstFramePoseConstraintSet = "");
 
 /// Use multiple frames to solve for global parameters such as body proportions and/or marker
 /// offsets together with the motion.
@@ -111,7 +117,9 @@ Eigen::MatrixXf trackSequence(
     const Eigen::MatrixXf& initialMotion,
     const TrackingConfig& config,
     const std::vector<size_t>& frames,
-    float regularizer = 0.0);
+    float regularizer = 0.0,
+    bool enforceFloorInFirstFrame = false,
+    const std::string& firstFramePoseConstraintSet = "");
 
 /// Track poses per-frame given a calibrated character.
 ///
