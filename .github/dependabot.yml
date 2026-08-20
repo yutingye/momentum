@@ -15,3 +15,10 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    ignore:
+      # 1.20.0 depends on @docusaurus/theme-mermaid 2.4.3, a Docusaurus v2 package that
+      # fails Docusaurus 3's package version check. Drop this once upstream releases a
+      # version that no longer pins it.
+      - dependency-name: "docusaurus-plugin-internaldocs-fb"
+        versions:
+          - ">=1.20.0"
