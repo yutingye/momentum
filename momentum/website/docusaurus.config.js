@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const {themes: prismThemes} = require('prism-react-renderer');
+const lightCodeTheme = prismThemes.github;
+const darkCodeTheme = prismThemes.dracula;
 const {fbContent, fbInternalOnly} = require('docusaurus-plugin-internaldocs-fb/internal');
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
